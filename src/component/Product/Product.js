@@ -1,9 +1,9 @@
-import React, { useContext, useState, useEffect } from "react";
-import { MyProductsContext } from "../../../container/App";
+import React, { useState, useEffect } from "react";
+import { MyProducts } from "../Data/ProductList";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import MyModal from "../../MyModal";
+import MyModal from "../MyModal";
 import "./Product.css";
 import styled from "styled-components";
 const ImgContainer = styled.div`
@@ -59,14 +59,13 @@ const OverlayBtn = styled.button`
   outline: none;
 `;
 const Product = () => {
-  const { MyProducts } = useContext(MyProductsContext);
   const [open, setOpen] = useState(false);
   const [content, setContent] = useState({
     url: null,
     title: null,
     price: null,
     starValue: null,
-    index:null
+    index: null
   });
   const toggleModal = () => setOpen(!open);
   const [Products, setProducts] = useState(MyProducts);
@@ -92,7 +91,7 @@ const Product = () => {
                         title: product.name,
                         price: product.price,
                         starValue: product.starValue,
-                        index:index
+                        index: index
                       });
                     }}
                   >

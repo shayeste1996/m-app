@@ -8,5 +8,8 @@ const GlobalStyle = createGlobalStyle`
   html {
     font-size: 62.5%;
   }
+  body{
+    font-size:1.5rem
+  }
 `;
 export default GlobalStyle;

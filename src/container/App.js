@@ -1,6 +1,6 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import Product from "../component/Product/Product";
+import ProductsList from "../component/Products/ProductsList";
 import FavoriteList from "../component/FavoriteList/FavoriteList";
 import GeneralStyle from "../Theme/GeneralStyle";
 import MyNavbar from "../component/Header/MyNavbar";
@@ -12,7 +12,7 @@ const App = () => {
       <GeneralStyle />
       <MyNavbar />
       <Switch>
-        <Route path="/" exact component={Product} />
+        <Route path="/" exact component={ProductsList} />
         <Route path="/favourits" component={FavoriteList} />
       </Switch>
     </>

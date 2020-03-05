@@ -1,10 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import ProductProvider from "./component/Context";
-
 import "./index.css";
 import App from "./container/App";
 import { BrowserRouter as Router } from "react-router-dom";
+import  ProductProvider  from "./component/Context";
 
 import * as serviceWorker from "./serviceWorker";
 

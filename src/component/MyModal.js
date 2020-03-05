@@ -1,30 +1,26 @@
-import React, { useState} from "react";
-import { MyProducts } from '../component/Data/ProductList';
-import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import React, { useContext } from "react";
+import { ProductContext } from "../component/Context";
+import { Modal, Button, Row, Col } from "react-bootstrap";
 import ReactStars from "react-stars";
 import FavoriteBtn from "../component/UI/Button/FavoriteBtn";
+import AddCardBtn from "../component/UI/Button/AddCardBtn";
 const MyModal = props => {
   const show = props.open;
-  const price = props.price;
-  const starValue = props.starValue;
-  const title = props.title;
-  const url = props.url;
-  const [products, setProducts] = useState(MyProducts);
-  const [favorits, setFavorits] = useState({
-    url: null,
-    price: null,
-    title: null
-  });
-  const favoritHandler = () => {
-    setFavorits({
-      url: url,
-      price: price,
-      title: title
+
+  const MyValue = useContext(ProductContext);
+  const MyProducts = MyValue.Products;
+  // const starValue = props.starValue;
+  const productIndex = props.productIndex;
+  const product = MyProducts[productIndex];
+
+  const setRate = starValue => {
+    const newProducts = MyProducts.map((item, index) => {
+      if (index === productIndex) return { ...item, starValue };
+      else return item;
     });
+    MyValue.setProducts(newProducts);
   };
+
   return (
     <>
       <Modal
@@ -43,26 +39,19 @@ const MyModal = props => {
           <Row>
             <Col>
               <p>قیمت محصول : {props.price}</p>
-              <FavoriteBtn onClick={favoritHandler} />
-              <p>امتیاز محصول :{starValue} </p>
+              <FavoriteBtn />
+              <AddCardBtn inCard={props.inCard} id={props.id} />
+              <p>امتیاز محصول :{props.starValue} </p>
               <ReactStars
                 count={5}
-                value={starValue}
+                value={product ? product.starValue : 0}
                 size={24}
                 color2={"#ffd700"}
-                onChange={starValue =>
-                  setProducts(
-                    products.map((value, id) =>
-                      id === props.productIndex
-                        ? { ...value, starValue }
-                        : value
-                    )
-                  )
-                }
+                onChange={starValue => setRate(starValue)}
               />
             </Col>
             <Col>
-              <img alt="product" src={url} style={{ height: "40rem" }} />
+              <img alt="product" src={props.url} style={{ height: "40rem" }} />
               {props.title}
             </Col>
           </Row>

@@ -5,22 +5,18 @@ import ReactStars from "react-stars";
 import FavoriteBtn from "../component/UI/Button/FavoriteBtn";
 import AddCardBtn from "../component/UI/Button/AddCardBtn";
 const MyModal = props => {
-  const show = props.open;
-
   const MyValue = useContext(ProductContext);
-  const MyProducts = MyValue.Products;
-  // const starValue = props.starValue;
+  const show = props.open;
+  const starValue = props.starValue;
   const productIndex = props.productIndex;
-  const product = MyProducts[productIndex];
-
+  const product = MyValue.Products[productIndex];
   const setRate = starValue => {
-    const newProducts = MyProducts.map((item, index) => {
+    const newProducts = MyValue.Products.map((item, index) => {
       if (index === productIndex) return { ...item, starValue };
       else return item;
     });
     MyValue.setProducts(newProducts);
   };
-
   return (
     <>
       <Modal

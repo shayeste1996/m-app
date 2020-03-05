@@ -4,37 +4,52 @@ export const ProductContext = createContext(MyProducts);
 const ProductProvider = props => {
   const [Products, setProducts] = useState([]);
   const [card, setCard] = useState([]);
-
+  const [rate, setRate] = useState([]);
+  //copying instead of refrencing
   const productsValue = () => {
     let Products = [];
     MyProducts.forEach(item => {
       const singleItem = { ...item };
       Products = [...Products, singleItem];
     });
-    setProducts(Products);
+    setProducts(() => Products);
   };
   const getProduct = id => {
     return Products.find(item => item.id === id);
   };
   const addToCard = id => {
     let temProduct = [...Products];
-    const index = temProduct.indexOf(getProduct(id));
-    const product = temProduct[index];
+    const proIndex = temProduct.indexOf(getProduct(id));
+    const product = temProduct[proIndex];
     product.inCard = true;
     product.count = 1;
     const price = product.price;
     product.total = price;
-    setCard(
-      () => {
-        return {
-          Products: temProduct,
-          card: [...card, product]
-        };
-      },
-      () => console.log(card, Products)
-    );
+    setCard(() => {
+      return { card: [product] };
+    });
   };
-  const MyValue = { Products, addToCard, setProducts };
+
+  // const setRate = starValue => {
+  //   const newProducts = MyProducts.map((item, index) => {
+  //     if (index === productIndex) return { ...item, starValue };
+  //     else return item;
+  //   });
+  //   MyValue.setProducts(newProducts);
+  // };
+
+
+
+  const giveStar = (starValue, id) => {
+    let temProduct = [...Products];
+    const proIndex = temProduct.indexOf(getProduct(id));
+    const product = temProduct[proIndex];
+    product.starValue = starValue;
+    setRate(() => {
+      return { rate: [product] };
+    });
+  };
+  const MyValue = { Products, addToCard,giveStar,setProducts };
   useEffect(() => {
     productsValue();
   }, []);

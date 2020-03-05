@@ -6,7 +6,7 @@ const ProductsList = () => {
   const MyValue = useContext(ProductContext);
   return (
     <Container>
-      <Row>
+      <Row className="justify-content-center pt-5">
         {MyValue.Products.map(product => (
           <Product key={product.id} product={product}/>
         ))}

@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import { Col } from "react-bootstrap";
-import MyModal from "../MyModal";
+import MyModal from "../Modal/MyModal";
 import CardContent from "./CardContent";
 const Product = props => {
-  const { url, inCard, price, starValue, title, id } = props.product;
+  const { url, inShopCart,inFavoriteCart, price, starValue, title, id,index } = props.product;
   const [open, setOpen] = useState(false);
   const [content, setContent] = useState({
     url,
-    inCard,
+    inShopCart,
+    inFavoriteCart,
     title,
     price,
     starValue,
+    index,
     id: null
   });
   const toggleModal = () => setOpen(!open);
@@ -31,6 +33,7 @@ const Product = props => {
         open={open}
         toggle={toggleModal}
        {...content}
+       index={index}
       />
     </>
   );

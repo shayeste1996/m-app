@@ -7,8 +7,8 @@ const ProductsList = () => {
   return (
     <Container>
       <Row className="justify-content-center pt-5">
-        {MyValue.Products.map(product => (
-          <Product key={product.id} product={product}/>
+        {MyValue.Products.map((product, index) => (
+          <Product key={product.id} product={product} index={index} />
         ))}
       </Row>
     </Container>

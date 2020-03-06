@@ -1,23 +1,41 @@
-import React, {useContext } from "react";
+import React, { useContext, useState } from "react";
 import { ProductContext } from "../../Context";
+import Button from "react-bootstrap/Button";
+import SpinnerIcon from "./SpinnerIcon";
+import CheckIcon from "./CheckIcon";
+import ShoppingIcon from "./ShoppingIcon";
 
 const AddCardBtn = props => {
   const MyValue = useContext(ProductContext);
   const id = props.id;
-  const inCard = props.inCard;
+  const inShopCart = props.inShopCart;
 
+  const [loading, setLoading] = useState(false);
+  const [show, setShow] = useState(true);
+  const loadingHandler = () => {
+    setLoading(true);
+    setShow(false);
+    setTimeout(() => {
+      setLoading(false);
+      setShow(true);
+    }, 2000);
+  };
   return (
-    <button
-      disabled={inCard ? true : false}
-      onClick={() => MyValue.addToCard(id)}
+    <Button
+      style={{ fontSize: "2rem" }}
+      className="p-2"
+      variant="light"
+      size="lg"
+      disabled={inShopCart ? true : false}
+      onClick={() => {
+        MyValue.addToCard(id);
+        loadingHandler();
+      }}
     >
-      {!inCard ? (
-        <span>افزودن به سبد خرید</span>
-      ) : (
-        <span>به سبد خرید اضافه شد</span>
-      )}
-    </button>
+      {loading && !show && <SpinnerIcon text="در حال اضافه کردن" />}
+      {!inShopCart && show && <ShoppingIcon text="افزودن به سبد خرید" />}
+      {inShopCart && show && <CheckIcon text="به سبد خرید اضافه شد" />}
+    </Button>
   );
 };
-
 export default AddCardBtn;

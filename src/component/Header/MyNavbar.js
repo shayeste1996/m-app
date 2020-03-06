@@ -7,13 +7,13 @@ const MyNavbar = () => {
   return (
     <section>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-        <Navbar.Brand href="#home">
+        <Navbar.Brand>
           <Link to="/">محصولات</Link>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link href="#features">
+            <Nav.Link>
               <Link to="/favourits">
                 <Badge pill variant="light">
                   9
@@ -23,8 +23,8 @@ const MyNavbar = () => {
             </Nav.Link>
           </Nav>
           <Nav>
-            <Nav.Link href="#deets">
-              <Link to="/u">
+            <Nav.Link>
+              <Link to="/ShoppingCart">
                 <Badge pill variant="light">
                   9
                 </Badge>

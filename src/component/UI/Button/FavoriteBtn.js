@@ -1,10 +1,12 @@
-import React, { useState } from "react";
-import Spinner from "react-bootstrap/Spinner";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart, faCheck } from "@fortawesome/free-solid-svg-icons";
+import React, { useState, useContext } from "react";
 import Button from "react-bootstrap/Button";
-
-const FavoriteBtn = () => {
+import { ProductContext } from "../../Context";
+import HeartIcon from "./HeartIcon";
+import CheckIcon from "./CheckIcon";
+import SpinnerIcon from "./SpinnerIcon";
+const FavoriteBtn = props => {
+  const MyValue = useContext(ProductContext);
+  const inFavoriteCart = props.inFavoriteCart;
   const [loading, setLoading] = useState(false);
   const [show, setShow] = useState(true);
   const loadingHandler = () => {
@@ -12,34 +14,23 @@ const FavoriteBtn = () => {
     setShow(false);
     setTimeout(() => {
       setLoading(false);
+      setShow(true);
     }, 2000);
   };
   return (
-    <Button
+    <Button style={{fontSize:'2rem'}} className="p-2"
       variant="light"
       size="lg"
-      onClick={loadingHandler}
-      disabled={loading}
+      onClick={() => {
+        MyValue.addToFavorite(props.id);
+        loadingHandler();
+      }}
+      disabled={inFavoriteCart ? true : false}
     >
-      {loading && (
-        <div>
-          <Spinner
-            as="span"
-            animation="border"
-            size="sm"
-            role="status"
-            aria-hidden="true"
-          />
-        </div>
-      )}
-      {!loading &&
-        (show ? (
-          <FontAwesomeIcon color="red" icon={faHeart} />
-        ) : (
-          <FontAwesomeIcon color="green" icon={faCheck} />
-        ))}
+      {loading && !show && <SpinnerIcon text="در حال اضافه کردن" />}
+      {!inFavoriteCart && show && <HeartIcon text="افزودن به علاقه مندی ها" />}
+      {inFavoriteCart && show && <CheckIcon text="به علاقه مندی ها اضافه شد" />}
     </Button>
   );
 };
-
 export default FavoriteBtn;

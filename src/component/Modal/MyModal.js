@@ -9,7 +9,6 @@ const MyModal = props => {
         style={{ height: "100%", padding: "5rem" }}
         show={show}
         onHide={props.toggle}
-        toggle={props.toggle}
         animation={false}
         size="lg"
         centered

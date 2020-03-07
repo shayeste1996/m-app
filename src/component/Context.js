@@ -5,6 +5,7 @@ const ProductProvider = props => {
   const [Products, setProducts] = useState([]);
   const [inShopCart, setInShopCart] = useState([]);
   const [inFavoriteCart, setInFavoriteCart] = useState([]);
+  const [total] = useState(0);
 
   // const [rate, setRate] = useState([]);
   //copying instead of refrencing
@@ -18,7 +19,6 @@ const ProductProvider = props => {
   };
   const getProduct = id => {
     return Products.find(item => item.id === id);
-    // console.log(id)
   };
   const addToCard = id => {
     let temProduct = [...Products];
@@ -29,7 +29,7 @@ const ProductProvider = props => {
     const price = product.price;
     product.total = price;
     setInShopCart(() => {
-      return { inShopCart: [product] };
+      return [...inShopCart, product];
     });
   };
   // const setRate = starValue => {
@@ -56,13 +56,58 @@ const ProductProvider = props => {
     const product = temProduct[proIndex];
     product.inFavoriteCart = true;
     setInFavoriteCart(() => {
-      return { inFavoriteCart: [product] };
+      return [...inFavoriteCart, product];
     });
   };
-  const MyValue = { Products, addToCard, getProduct,addToFavorite };
+  const increment = id => {
+    let temProduct = [...Products];
+    const proIndex = temProduct.indexOf(getProduct(id));
+    const product = temProduct[proIndex];
+    product.count = product.count + 1;
+    const price = product.price;
+    product.total = price * product.count;
+    setInShopCart(() => {
+      return [product];
+    });
+  };
+  const decrement = id => {
+    console.log("decrement method");
+  };
+  const removeProduct = id => {
+    let temProduct = [...Products];
+    const proIndex = temProduct.indexOf(getProduct(id));
+    temProduct.splice(proIndex,1);
+    setInShopCart(() => {
+      return [...inShopCart];
+    });
+    console.log(temProduct);
+  };
+  const clearCart = () => {
+    setInShopCart([]);
+  };
+  useEffect(() => {
+    productsValue();
+  }, [inShopCart]);
+  const addTotal = () => {
+    let subTotal = 0;
+    inShopCart.map(item => (item.total += subTotal));
+  };
+  const MyValue = {
+    Products,
+    addToCard,
+    getProduct,
+    addToFavorite,
+    inShopCart,
+    increment,
+    decrement,
+    removeProduct,
+    clearCart,
+    total
+  };
   useEffect(() => {
     productsValue();
   }, []);
+
   return (
     <ProductContext.Provider value={MyValue}>
       {props.children}

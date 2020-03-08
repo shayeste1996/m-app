@@ -9,7 +9,6 @@ const AddCardBtn = props => {
   const MyValue = useContext(ProductContext);
   const id = props.id;
   const inShopCart = props.inShopCart;
-
   const [loading, setLoading] = useState(false);
   const [show, setShow] = useState(true);
   const loadingHandler = () => {
@@ -30,6 +29,7 @@ const AddCardBtn = props => {
       onClick={() => {
         MyValue.addToCard(id);
         loadingHandler();
+        console.log('add')
       }}
     >
       {loading && !show && <SpinnerIcon text="در حال اضافه کردن" />}

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Row, Col } from "react-bootstrap";
 import { ProductContext } from "../../component/Context";
-import ReactStars from "react-stars";
+// import ReactStars from "react-stars";
 import FavoriteBtn from "../../component/UI/Button/FavoriteBtn";
 import AddCardBtn from "../../component/UI/Button/AddCardBtn";
 const ModalContent = props => {
@@ -32,13 +32,13 @@ const ModalContent = props => {
           </Col>
         </Row>
         <p>امتیاز محصول :{props.starValue} </p>
-        <ReactStars
+        {/* <ReactStars
           count={5}
           // value={product ? product.starValue : 0}
           size={24}
           color2={"#ffd700"}
           onChange={() => MyValue.getProduct(props.id)}
-        />
+        /> */}
       </Col>
       <Col md={5} className="pl-0">
         <img alt="product" width="100%" src={props.url} />

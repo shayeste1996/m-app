@@ -3,7 +3,7 @@ import { Col } from "react-bootstrap";
 import MyModal from "../Modal/MyModal";
 import CardContent from "./CardContent";
 const Product = props => {
-  const { url, inShopCart,inFavoriteCart, price, starValue, title, id,index } = props.product;
+  const { url, inShopCart,inFavoriteCart, price, starValue, title,index } = props.product;
   const [open, setOpen] = useState(false);
   const [content, setContent] = useState({
     url,

@@ -74,13 +74,13 @@ const ProductProvider = props => {
     console.log("decrement method");
   };
   const removeProduct = id => {
-    let temProduct = [...Products];
-    const proIndex = temProduct.indexOf(getProduct(id));
-    temProduct.splice(proIndex,1);
-    setInShopCart(() => {
-      return [...inShopCart];
-    });
-    console.log(temProduct);
+    // let temProduct = [...Products];
+    // const proIndex = temProduct.indexOf(getProduct(id));
+    // temProduct.splice(proIndex,1);
+    // setInShopCart(() => {
+    //   return [...inShopCart];
+    // });
+    console.log("temProduct");
   };
   const clearCart = () => {
     setInShopCart([]);

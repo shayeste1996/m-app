@@ -74,7 +74,6 @@ const ProductProvider = props => {
     console.log("decrement method");
   };
   const removeProduct = id => {
-<<<<<<< HEAD
     let temProduct = [...Products];
     const proIndex = temProduct.indexOf(getProduct(id));
     temProduct.splice(proIndex, 1);
@@ -102,41 +101,6 @@ const ProductProvider = props => {
     clearCart,
     total
   };
-=======
-    // let temProduct = [...Products];
-    // const proIndex = temProduct.indexOf(getProduct(id));
-    // temProduct.splice(proIndex,1);
-    // setInShopCart(() => {
-    //   return [...inShopCart];
-    // });
-    console.log("temProduct");
-  };
-  const clearCart = () => {
-    setInShopCart([]);
-  };
-  useEffect(() => {
-    productsValue();
-  }, [inShopCart]);
-  const addTotal = () => {
-    let subTotal = 0;
-    inShopCart.map(item => (item.total += subTotal));
-  };
-  const MyValue = {
-    Products,
-    addToCard,
-    getProduct,
-    addToFavorite,
-    inShopCart,
-    increment,
-    decrement,
-    removeProduct,
-    clearCart,
-    total
-  };
-  useEffect(() => {
-    productsValue();
-  }, []);
->>>>>>> 39499a3b921fe1b5043731d4d8cd9d858b62cd81
 
   return (
     <ProductContext.Provider value={MyValue}>

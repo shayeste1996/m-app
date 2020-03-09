@@ -1,8 +1,6 @@
 export const MyProducts = [
   {
     category: "Sporting Goods",
-    inShopCart: false,
-    inFavoriteCart: false,
     price: 2000000,
     title: "گوشی موبایل سامسونگ مدل Galaxy Fold ظرفیت 512 گیگابایت",
     id: 0,
@@ -18,8 +16,6 @@ export const MyProducts = [
   {
     category: "Sporting Goods",
     price: 50000000,
-    inShopCart: false,
-    inFavoriteCart: false,
     title:
       "گوشی سامسونگ مدل Note10 Lite SM-N770F دو سیم کارت ظرفیت 128 گیگابایت",
     id: 1,
@@ -36,8 +32,6 @@ export const MyProducts = [
   {
     category: "Sporting Goods",
     price: 6000000,
-    inShopCart: false,
-    inFavoriteCart: false,
     title: "گوشی موبایل اپل مدل iPhone X ظرفیت 64 گیگابایت",
     id: 2,
     url: "/Assests/Images/3.jpg",
@@ -53,8 +47,6 @@ export const MyProducts = [
   {
     category: "Electronics",
     price: 2852000,
-    inShopCart: false,
-    inFavoriteCart: false,
     title: "گوشی موبایل اپل مدل iPhone 8 ظرفیت 64 گیگابایت",
     id: 3,
     url: "/Assests/Images/4.jpg",
@@ -70,8 +62,6 @@ export const MyProducts = [
   {
     category: "Electronics",
     price: 4785000,
-    inShopCart: false,
-    inFavoriteCart: false,
     title: "گوشی سامسونگ مدل A10s SM-A107F/DS دو سیم کارت ظرفیت 32 گیگابایت",
     id: 4,
     url: "/Assests/Images/5.jpg",
@@ -87,8 +77,6 @@ export const MyProducts = [
   {
     category: "Electronics",
     price: 3652000,
-    inShopCart: false,
-    inFavoriteCart: false,
     title: "گوشی موبایل آنر مدل 8C دو سیم کارت ظرفیت 32 گیگابایت",
     id: 5,
     url: "/Assests/Images/6.jpg",

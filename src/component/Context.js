@@ -5,9 +5,8 @@ const ProductProvider = props => {
   const [Products, setProducts] = useState([]);
   const [inShopCart, setInShopCart] = useState([]);
   const [inFavoriteCart, setInFavoriteCart] = useState([]);
-  const [total] = useState(0);
-
-  // const [rate, setRate] = useState([]);
+  const [total, setTotal] = useState([]);
+  console.log(total);
   //copying instead of refrencing
   const productsValue = () => {
     let Products = [];
@@ -20,17 +19,40 @@ const ProductProvider = props => {
   const getProduct = id => {
     return Products.find(item => item.id === id);
   };
+  const checkInShopHandler = id => {
+    return inShopCart.find(item => item.id === id);
+  };
+
   const addToCard = id => {
     let temProduct = [...Products];
     const proIndex = temProduct.indexOf(getProduct(id));
     const product = temProduct[proIndex];
-    product.inShopCart = true;
-    product.count = 1;
-    const price = product.price;
-    product.total = price;
-    setInShopCart(() => {
-      return [...inShopCart, product];
-    });
+    if (checkInShopHandler(id)) {
+      console.log("it exists");
+    } else {
+      product.count = 1;
+      const price = product.price;
+      product.total = price;
+      // total.length > 0 ? total.reduce(sum) : console.log("error");
+      // if (total.length > 0) {
+      //   return setTotal(total.reduce((a, b) => a + b));
+      // } else {
+      //   setTotal([...total, product.total]);
+      // }
+      setTotal([...total, product.total]);
+      setInShopCart([...inShopCart, product]);
+    }
+  };
+  const checkInFavoriteHandler = id => {
+    return inFavoriteCart.find(item => item.id === id);
+  };
+  const addToFavorite = id => {
+    let temProduct = [...Products];
+    const proIndex = temProduct.indexOf(getProduct(id));
+    const product = temProduct[proIndex];
+    checkInFavoriteHandler(id)
+      ? console.log("it exists")
+      : setInFavoriteCart([...inFavoriteCart, product]);
   };
   // const setRate = starValue => {
   //   const newProducts = MyProducts.map((item, index) => {
@@ -50,15 +72,6 @@ const ProductProvider = props => {
   //   //   return { rate: [product] };
   //   // });
   // };
-  const addToFavorite = id => {
-    let temProduct = [...Products];
-    const proIndex = temProduct.indexOf(getProduct(id));
-    const product = temProduct[proIndex];
-    product.inFavoriteCart = true;
-    setInFavoriteCart(() => {
-      return [...inFavoriteCart, product];
-    });
-  };
   const increment = id => {
     let temProduct = [...Products];
     const proIndex = temProduct.indexOf(getProduct(id));
@@ -83,7 +96,11 @@ const ProductProvider = props => {
     console.log(temProduct);
   };
   const clearCart = () => {
-    productsValue();
+    let temProduct = [...Products];
+    temProduct.forEach(product => {
+      product.count = 0;
+      product.total = 0;
+    });
     setInShopCart([]);
   };
   useEffect(() => {
@@ -95,13 +112,15 @@ const ProductProvider = props => {
     getProduct,
     addToFavorite,
     inShopCart,
+    inFavoriteCart,
     increment,
     decrement,
     removeProduct,
     clearCart,
-    total
+    total,
+    checkInShopHandler,
+    checkInFavoriteHandler
   };
-
   return (
     <ProductContext.Provider value={MyValue}>
       {props.children}

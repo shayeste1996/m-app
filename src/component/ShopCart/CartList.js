@@ -11,7 +11,6 @@ const CartList = props => {
             {cart.map(item => {
               return (
                 <CartItem
-                  id={item.id}
                   key={item.id}
                   item={item}
                   value={value}

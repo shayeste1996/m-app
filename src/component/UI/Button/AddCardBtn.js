@@ -4,11 +4,9 @@ import Button from "react-bootstrap/Button";
 import SpinnerIcon from "./SpinnerIcon";
 import CheckIcon from "./CheckIcon";
 import ShoppingIcon from "./ShoppingIcon";
-
 const AddCardBtn = props => {
   const MyValue = useContext(ProductContext);
-  const id = props.id;
-  const inShopCart = props.inShopCart;
+  const checkInShopHandler = MyValue.checkInShopHandler(props.id);
   const [loading, setLoading] = useState(false);
   const [show, setShow] = useState(true);
   const loadingHandler = () => {
@@ -25,16 +23,15 @@ const AddCardBtn = props => {
       className="p-2"
       variant="light"
       size="lg"
-      disabled={inShopCart ? true : false}
+      disabled={checkInShopHandler ? true : false}
       onClick={() => {
-        MyValue.addToCard(id);
+        MyValue.addToCard(props.id);
         loadingHandler();
-        console.log('add')
       }}
     >
       {loading && !show && <SpinnerIcon text="در حال اضافه کردن" />}
-      {!inShopCart && show && <ShoppingIcon text="افزودن به سبد خرید" />}
-      {inShopCart && show && <CheckIcon text="به سبد خرید اضافه شد" />}
+      {!checkInShopHandler && show && <ShoppingIcon text="افزودن به سبد خرید" />}
+      {checkInShopHandler && show && <CheckIcon text="به سبد خرید اضافه شد" />}
     </Button>
   );
 };

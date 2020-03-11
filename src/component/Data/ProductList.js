@@ -15,7 +15,7 @@ export const MyProducts = [
   },
   {
     category: "Sporting Goods",
-    price: 50000000,
+    price: 5000000,
     title:
       "گوشی سامسونگ مدل Note10 Lite SM-N770F دو سیم کارت ظرفیت 128 گیگابایت",
     id: 1,

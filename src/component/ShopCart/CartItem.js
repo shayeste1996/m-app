@@ -1,42 +1,35 @@
 import React from "react";
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import RemoveItemBtn from "../UI/Button/RemoveItemBtn";
 import QuantityBtn from "./QuantityBtn";
 const CartItem = props => {
   const { id, url, price, total, count } = props.item;
-  const { increment, decrement, removeProduct } = props.value;
+  const { increment, decrement, removeItem } = props.value;
   return (
-    <>
-      <Table>
-        <tbody>
-          <tr>
-            <TableData>
-              <ProductImg src={url} />
-            </TableData>
-            <TableData>
-              <span>سامسونگ</span>
-            </TableData>
-            <TableData>{price}</TableData>
-            <TableData>
-              <QuantityBtn
-                add={() => increment(id)}
-                minus={() => decrement(id)}
-                count={count}
-              />
-            </TableData>
-            <TableData>
-              <FontAwesomeIcon
-                onClick={() => removeProduct(id)}
-                color="red"
-                icon={faTrash}
-              />
-            </TableData>
-            <TableData>{total}</TableData>
-          </tr>
-        </tbody>
-      </Table>
-    </>
+    <Table>
+      <tbody>
+        <tr>
+          <TableData>
+            <ProductImg src={url} />
+          </TableData>
+          <TableData>
+            <span>سامسونگ</span>
+          </TableData>
+          <TableData>{price}</TableData>
+          <TableData>
+            <QuantityBtn
+              add={() => increment(id)}
+              minus={() => decrement(id)}
+              count={count}
+            />
+          </TableData>
+          <TableData>
+            <RemoveItemBtn remove={() => removeItem(id)} />
+          </TableData>
+          <TableData>{total}</TableData>
+        </tr>
+      </tbody>
+    </Table>
   );
 };
 export default CartItem;

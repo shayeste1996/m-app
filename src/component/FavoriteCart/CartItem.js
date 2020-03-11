@@ -37,7 +37,7 @@ const ProductImage = styled.img`
   border-radius: 1.5rem;
   position: relative;
 `;
-const CardText = styled.p`
+const CardText = styled.div`
   text-align: center;
   font-size: 1.5rem;
   font-weight: 600;

@@ -18,9 +18,9 @@ const ModalContent = props => {
     console.log(productIndex);
   };
   return (
-    <Row>
-      <Col md={7} className="pr-0 pl-5">
-        <h1>ویژگی های محصول </h1>
+    <Row className="px-4">
+      <Col xs={12} md={7} className="pr-0 pl-5">
+        <h2>ویژگی های محصول </h2>
         {props.title}
         <p>قیمت محصول : {props.price}</p>
         <Row>
@@ -40,7 +40,7 @@ const ModalContent = props => {
           onChange={() => MyValue.getProduct(props.id)}
         /> */}
       </Col>
-      <Col md={5} className="pl-0">
+      <Col xs={12} md={5} className="pl-0">
         <img alt="product" width="100%" src={props.url} />
       </Col>
     </Row>

@@ -5,8 +5,7 @@ const ProductProvider = props => {
   const [Products, setProducts] = useState([]);
   const [inShopCart, setInShopCart] = useState([]);
   const [inFavoriteCart, setInFavoriteCart] = useState([]);
-  const [total, setTotal] = useState([]);
-  console.log(total);
+  const [total, setTotal] = useState(0);
   //copying instead of refrencing
   const productsValue = () => {
     let Products = [];
@@ -22,7 +21,6 @@ const ProductProvider = props => {
   const checkInShopHandler = id => {
     return inShopCart.find(item => item.id === id);
   };
-
   const addToCard = id => {
     let temProduct = [...Products];
     const proIndex = temProduct.indexOf(getProduct(id));
@@ -33,16 +31,14 @@ const ProductProvider = props => {
       product.count = 1;
       const price = product.price;
       product.total = price;
-      // total.length > 0 ? total.reduce(sum) : console.log("error");
-      // if (total.length > 0) {
-      //   return setTotal(total.reduce((a, b) => a + b));
-      // } else {
-      //   setTotal([...total, product.total]);
-      // }
-      setTotal([...total, product.total]);
       setInShopCart([...inShopCart, product]);
     }
   };
+  useEffect(() => {
+    let subTotal = 0;
+    inShopCart.map(item => (subTotal += item.total));
+    setTotal([subTotal]);
+  }, [inShopCart]);
   const checkInFavoriteHandler = id => {
     return inFavoriteCart.find(item => item.id === id);
   };
@@ -73,18 +69,26 @@ const ProductProvider = props => {
   //   // });
   // };
   const increment = id => {
-    let temProduct = [...Products];
-    const proIndex = temProduct.indexOf(getProduct(id));
-    const product = temProduct[proIndex];
+    let tempCart = [...inShopCart];
+    const selectedProduct = tempCart.find(item => item.id === id);
+    const index = tempCart.indexOf(selectedProduct);
+    const product = tempCart[index];
     product.count = product.count + 1;
-    const price = product.price;
-    product.total = price * product.count;
+    product.total = product.price * product.count;
     setInShopCart(() => {
-      return [product];
+      return [...tempCart];
     });
   };
   const decrement = id => {
-    console.log("decrement method");
+    let tempCart = [...inShopCart];
+    const selectedProduct = tempCart.find(item => item.id === id);
+    const index = tempCart.indexOf(selectedProduct);
+    const product = tempCart[index];
+    product.count = product.count <= 1 ? 1 : product.count - 1;
+    product.total = product.price * product.count;
+    setInShopCart(() => {
+      return [...tempCart];
+    });
   };
   const removeProduct = id => {
     let temProduct = [...Products];
@@ -103,6 +107,10 @@ const ProductProvider = props => {
     });
     setInShopCart([]);
   };
+  const removeItem = id => {
+    let tempCart = [...inShopCart];
+    setInShopCart(tempCart.filter(item => item.id !== id));
+  };
   useEffect(() => {
     productsValue();
   }, []);
@@ -119,7 +127,8 @@ const ProductProvider = props => {
     clearCart,
     total,
     checkInShopHandler,
-    checkInFavoriteHandler
+    checkInFavoriteHandler,
+    removeItem
   };
   return (
     <ProductContext.Provider value={MyValue}>
